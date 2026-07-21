@@ -4,6 +4,7 @@ import com.joan.store.mainstore.entry.Category;
 
 import org.springframework.web.bind.annotation.*;
 import com.joan.store.mainstore.services.CategoryServices;
+import com.joan.store.mainstore.dto.CategoryDto;
 import java.util.List;
 
 @RestController
@@ -19,8 +20,14 @@ public class CategoryController {
 
     // Create a category
     @PostMapping
-    public Category createCategory(@RequestBody Category category) {
-        return categoryServices.createCategory(category);
+    public  Category createCategory(@RequestBody CategoryDto categoryDto) {
+        // Convert CategoryDto to Category entity
+        Category category = new Category();
+        category.setName(categoryDto.getName());
+        category.setDescription(categoryDto.getDescription());
+        
+        return  categoryServices.createCategory(category);
+         
     }
 
     // Get all categories
@@ -39,8 +46,12 @@ public class CategoryController {
     // Update a category
     @PutMapping("/{id}")
     public Category updateCategory(@PathVariable Long id,
-                                   @RequestBody Category updatedCategory) {
-        return categoryServices.updateCategory(id, updatedCategory);
+                                   @RequestBody CategoryDto categoryDto) {
+
+        Category category = new Category();
+        category.setName(categoryDto.getName());
+        category.setDescription(categoryDto.getDescription());
+        return categoryServices.updateCategory(id, category);
     }
 
     // Delete a category
