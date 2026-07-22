@@ -6,8 +6,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SubCategoryDto{
-    
+public class AllSubCategoriesByCategoryIdDto {
+
+    private Long categoryId;
+    private Long id;
     private String name;
-    
+
 }
