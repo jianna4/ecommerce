@@ -4,6 +4,7 @@ import com.joan.store.mainstore.repository.SubCategoryRepository;
 
 import com.joan.store.mainstore.repository.CategoryRepository;
 import com.joan.store.mainstore.entry.SubCategory;
+import com.joan.store.mainstore.dto.AllSubCategoriesByCategoryIdDto;
 import com.joan.store.mainstore.entry.Category;
 import java.util.List;
 
@@ -32,14 +33,24 @@ public class SubCategoryService {
     public List<SubCategory> getAllSubcategories() {
         return subcatRepository.findAll();
     }
-    public List<SubCategory> getAllSubCategoriesByCategory(Long categoryid){
-        Category category = categoryRepository.findById(categoryid)
-        .orElseThrow(() -> new IllegalArgumentException(
-                    "Category not found with id: " + categoryid
+    public List<AllSubCategoriesByCategoryIdDto> getAllSubCategoriesByCategory(Long categoryId) {
+
+    Category category = categoryRepository.findById(categoryId)
+            .orElseThrow(() -> new IllegalArgumentException(
+                    "Category not found with id: " + categoryId
             ));
 
-           return subcatRepository.findByCategory(category); 
-    }
+    List<SubCategory> subCategories =
+            subcatRepository.findByCategoryId(categoryId);
+
+    return subCategories.stream()
+            .map(subcat -> new AllSubCategoriesByCategoryIdDto(
+                    subcat.getCategory().getId(),
+                    subcat.getId(),
+                    subcat.getName()
+            ))
+            .toList();
+}
     
     public SubCategory updateSubcategory(Long categoryid, Long id, SubCategory subCategory) {
 

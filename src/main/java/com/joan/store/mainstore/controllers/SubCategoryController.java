@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.joan.store.mainstore.entry.SubCategory;
 import com.joan.store.mainstore.services.SubCategoryService;
-
+import com.joan.store.mainstore.dto.AllSubCategoriesByCategoryIdDto;
+import com.joan.store.mainstore.dto.SubCategoryDto;
 
 @RestController
 @RequestMapping("/api")
@@ -26,7 +27,7 @@ public class SubCategoryController {
 
     // Gets all subcategories in a category
     @GetMapping("/categories/{categoryId}/subcategories")
-    public List<SubCategory> getAllSubCategoriesByCategory(@PathVariable Long categoryId) {
+    public List<AllSubCategoriesByCategoryIdDto> getAllSubCategoriesByCategory(@PathVariable Long categoryId) {
         return subCategoryService.getAllSubCategoriesByCategory(categoryId);
     }
     
@@ -36,7 +37,9 @@ public class SubCategoryController {
     }
     
     @PostMapping("/categories/{categoryId}/subcategories")
-    public SubCategory createSubCategory(@PathVariable Long categoryId, @RequestBody SubCategory subCategory){
+    public SubCategory createSubCategory(@PathVariable Long categoryId, @RequestBody SubCategoryDto subCategoryDto){
+        SubCategory subCategory=new SubCategory();
+        subCategory.setName(subCategoryDto.getName());
         return subCategoryService.createSubCategory(categoryId, subCategory);
     }
     
