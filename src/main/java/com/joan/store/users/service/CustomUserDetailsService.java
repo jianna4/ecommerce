@@ -1,5 +1,4 @@
-package com.joan.store.mainstore.security;
-
+package com.joan.store.users.service;
 import com.joan.store.users.entity.User;
 import com.joan.store.users.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
