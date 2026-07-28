@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.joan.store.users.authdto.AuthResponseDto;
 import com.joan.store.users.authdto.LoginRequestDto;
+import com.joan.store.users.authdto.LoginResponceDto;
 import com.joan.store.users.authdto.RegisterRequestDto;
 import com.joan.store.users.entity.Role;
 import com.joan.store.users.entity.User;
@@ -63,12 +64,13 @@ public class AuthService {
         return response;
     }
 
-    public AuthResponseDto Login(LoginRequestDto loginReduRequestDto){
+   
+    public LoginResponceDto Login(LoginRequestDto loginRequestDto){
 
     }
 
     public void Logout(){
-        x
+        
     }
 
 }
